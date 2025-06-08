@@ -1,0 +1,229 @@
+
+
+<!-- 3 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="./images/logo.png">
+  <meta charset="UTF-8" />
+  <title>Voter Card Generator with QR</title>
+
+  <!-- Styling -->
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f8ff;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    form {
+      margin-bottom: 30px;
+    }
+
+    input, select, button {
+      padding: 10px;
+      margin: 5px;
+      width: 250px;
+    }
+
+    .card-wrapper {
+      width: 750px;
+      margin: 0 auto;
+      background: linear-gradient(to bottom, #ffffff, #f5f5f5);
+      border: 2px solid #000;
+      border-radius: 8px;
+      padding: 20px;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: none;
+    }
+
+    .card-header {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #1a237e;
+      text-transform: uppercase;
+      text-shadow: 1px 1px 0px #ccc;
+    }
+
+    .card-section {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .card-photo img {
+      width: 120px;
+      height: 140px;
+      border-radius: 6px;
+      border: 1px solid #000;
+    }
+
+    .card-details {
+      flex: 1;
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    .detail-row {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .label {
+      font-weight: bold;
+      display: inline-block;
+      width: 130px;
+    }
+
+    .qr-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    #downloadBtn {
+      margin-top: 25px;
+      padding: 10px 20px;
+      background-color: #0074d9;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #downloadBtn:hover {
+      background-color: #005fa3;
+    }
+  </style>
+
+  <!-- QR + PDF Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <!-- <?php include 'header_voter-card.php' ; ?> -->
+   <!-- <div id="php-header-container"></div> -->
+    <%- include('partials/header') %>
+
+
+  <h2>Search Your Voter Card</h2>
+
+  <form id="voterForm">
+    <input type="text" id="voter_id" placeholder="Voter ID" required><br>
+    <input type="text" id="dob" placeholder="Date of Birth (DD-MM-YYYY)" required><br>
+    <select id="gender" required>
+      <option value="">Select Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select><br>
+    <button type="submit">Search</button>
+  </form>
+
+  <!-- Voter Card -->
+  <div id="voterCard" class="card-wrapper">
+    <div class="card-header">Election Commission of India</div>
+    <div class="card-section">
+      <div class="card-photo">
+        <img id="v_photo" src="" alt="Voter Photo">
+      </div>
+      <div class="card-details">
+        <div class="detail-row"><span class="label">Voter ID:</span><span id="v_id"></span></div>
+        <div class="detail-row"><span class="label">Name:</span><span id="v_name"></span></div>
+        <div class="detail-row"><span class="label">DOB:</span><span id="v_dob"></span></div>
+        <div class="detail-row"><span class="label">Gender:</span><span id="v_gender"></span></div>
+        <div class="detail-row"><span class="label">Constituency:</span><span id="v_const"></span></div>
+      </div>
+    </div>
+    <div class="qr-section">
+      <canvas id="qrCanvas" width="100" height="100"></canvas>
+      <div style="font-size: 12px;">Scan to verify</div>
+    </div>
+  </div>
+
+  <button id="downloadBtn">Download Voter Card as PDF</button>
+
+  <script>
+    document.getElementById("voterForm").addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      const voter_id = document.getElementById("voter_id").value;
+      const date_of_birth = document.getElementById("dob").value;
+      const gender = document.getElementById("gender").value;
+
+      const response = await fetch("http://localhost:3000/get-voter-details", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voter_id, date_of_birth, gender })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        const voter = data.data;
+
+        // Set voter details
+        document.getElementById("v_id").innerText = voter.voter_id;
+        document.getElementById("v_name").innerText = voter.name;
+        document.getElementById("v_dob").innerText = voter.date_of_birth;
+        document.getElementById("v_gender").innerText = voter.gender;
+        document.getElementById("v_const").innerText = voter.constituency;
+
+        // Display image from base64
+        document.getElementById("v_photo").src = voter.photo_base64;
+
+        // Generate QR code
+        new QRious({
+          element: document.getElementById("qrCanvas"),
+          value: `Voter ID: ${voter.voter_id}
+      Name: ${voter.name}
+      DOB: ${voter.date_of_birth}
+      Gender: ${voter.gender}
+      Constituency: ${voter.constituency}`,
+          size: 100
+        });
+
+              document.getElementById("voterCard").style.display = "block";
+              document.getElementById("downloadBtn").style.display = "inline-block";
+      } else {
+        // alert("Voter not found!");
+        alert("No matching record found");
+              document.getElementById("voterCard").style.display = "none";
+              document.getElementById("downloadBtn").style.display = "none";
+      }
+
+    });
+
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      html2canvas(document.getElementById("voterCard")).then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF("landscape", "px", [canvas.width, canvas.height]);
+        pdf.addImage(imgData, "PNG", 190, 120);
+        pdf.save("Voter_Card.pdf");
+      });
+    });
+
+
+    // adding header
+    fetch("http://your-php-server.com/header_voter-card.php")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("php-header-container").innerHTML = data;
+  });
+
+  </script>
+
+</body>
+</html>
+
+
+

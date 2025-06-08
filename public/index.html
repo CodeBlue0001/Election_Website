@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Election Commission of India</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="static/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+     <!-- <img src="../public/images/logo.png" alt="Website Logo">
+       -->
+
+       <link rel="icon" href="./images/logo.png">
+
+</head>
+
+<body>
+
+    <!-- Header will be injected here -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/voting.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Traditional way of voting</h5>
+                        <p>People peacefully giving vote.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/election.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Every vote counts!</h5>
+                        <p>Everyone has the equal right to vote.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="assets/groupB.jpg" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Team-Mates</h5>
+                        <p>We are a team working on various project since Semester-1</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-target="#carouselExampleCaptions"
+                data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-target="#carouselExampleCaptions"
+                data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="content">
+
+        <!-- Navigation Tabs -->
+        <section class="bg-gray-100 py-4">
+            <div class="container d-flex justify-content-center">
+                <div class="btn-group" role="group" aria-label="Info Tabs">
+                    <a href="mythVSreality.html" class="btn text-white mr-3 px-4 py-2 rounded-pill"
+                        style="background-color:rgb(215, 77, 173);">
+                        <i class="fas fa-info-circle mr-2"></i> Myth Vs Reality
+                    </a>
+                    <a href="https://www.eci.gov.in/issue-details-page/press-releases"
+                        class="btn text-white mr-3 px-4 py-2 rounded-pill" style="background-color:rgb(215, 77, 173);">
+                        <i class="fas fa-newspaper mr-2"></i> Press Releases
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Links Section -->
+        <section class="quick-links">
+            <div class="container">
+                <div class="link-box">
+                    <a href="/voter_card_download">
+                        <img src="assets/voterdetails.png" alt="Voter Details">
+                        <h3>Voter Details</h3>
+                    </a>
+                </div>
+                <div class="link-box">
+                    <a href="politicalparty.html">
+                        <img src="assets/candidate-popularity.png" alt="Political Parties">
+                        <h3>Political Parties</h3>
+                    </a>
+                </div>
+                <div class="link-box">
+                    <a href="https://www.eci.gov.in/issue-details-page/election-stories">
+                        <img src="assets/news&notices.png" alt="Notices">
+                        <h3>Election Stories</h3>
+                    </a>
+                </div>
+                <div class="link-box">
+                    <a href="https://voting-result.onrender.com/">
+                        <img src="assets/votingresult.png" alt="Election Results">
+                        <h3>Election Results</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Announcements Section -->
+        <section class="news-updates">
+            <div class="container">
+                <h2>Latest Announcements</h2>
+                <ul>
+                    <li>
+                        <a href="#">Notice for New Voter Registration Guidelines</a>
+                        <span class="date">29-Mar-2025</span>
+                    </li>
+                    <li>
+                        <a href="#">Updated Election Schedule for 2025</a>
+                        <span class="date">28-Mar-2025</span>
+                    </li>
+                    <li>
+                        <a href="#">Instructions for Electronic Voting Machines</a>
+                        <span class="date">27-Mar-2025</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer will be injected here -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="static/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+
+    <!-- JS to load header and footer -->
+    <script src="static/script.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(45deg, #00cc88, #002aff);
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .hero-section p {
+            font-size: 1.2em;
+        }
+
+        /* Introduction Section */
+        .introduction {
+            display: flex;
+            flex-direction: column;
+            padding: 40px 20px;
+            background-image: url(assets/parlament1.jpg);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            /* background-position: center; */
+            /* background-attachment: fixed; ensures the image stays put */
+            /* height: 100vh; full viewport height */
+            /* position: relative; */
+        }
+
+        .intro-content {
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            /* dark overlay for readability */
+            /* color: #ceece3; */
+            color: white;
+            border-radius: 10px;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        .intro-text {
+            flex: 1;
+        }
+
+        .intro-text h2,
+        h3 {
+            text-align: justify;
+        }
+
+        /* Features Section */
+        .features {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            text-align: center;
+        }
+
+        /* Footer Section */
+        .footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .footer a {
+            color: #00c0ff;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2em;
+            }
+
+            .hero-section p {
+                font-size: 1em;
+            }
+
+            .introduction {
+                padding: 10px;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-attachment: scroll;
+                /* disable fixed on small screens */
+                height: auto;
+            }
+
+            .intro-content {
+                max-height: 60vh;
+                overflow-y: auto;
+                padding: 15px;
+                background-color: rgba(0, 0, 0, 0.7);
+                /* stronger background for clarity */
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header will be injected here -->
+    <div id="header-container"></div>
+
+    <!-- Header Section -->
+    <header class="hero-section">
+        <h1>About Us</h1>
+        <p>Strengthening Democracy Through Technology</p>
+    </header>
+
+    <!-- Introduction Section -->
+    <section class="introduction">
+        <div class="intro-content">
+            <div class="intro-text">
+                <h2>Who are 'we'?</h2>
+                <p>We are a team of passionate computer science students from Central Calcutta Polytechnic, committed to
+                    leveraging technology to improve and secure the voting process. Our major project, this website, is
+                    designed with a vision to empower citizens, simplify voting, and enhance electoral integrity.</p>
+                <p>In today’s world, ensuring a transparent and fair election is crucial. Recognizing the challenges
+                    such as voter fraud, low participation, and accessibility barriers, we set out to create an
+                    innovative platform that bridges these gaps.</p>
+
+                <h3>Our website provides:</h3>
+                <ul>
+                    <li>A secure and user-friendly system for online voting.</li>
+                    <li>Advanced mechanisms to eliminate fraudulent activities and ensure authenticity.</li>
+                    <li>Easy access to real-time election updates and results.</li>
+                </ul>
+                <p>We believe that technology can strengthen democracy by making elections more efficient,
+                    inclusive, and trustworthy. This project represents our dedication to using our skills to
+                    address real-world problems and contribute to society.</p>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2>What Makes Us Unique?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <span class="material-symbols-outlined">
+                    lock
+                </span>
+                <h3>Secure Voting</h3>
+                <p>Ensures a safe and secure voting process.</p>
+            </div>
+            <div class="feature-card">
+                <span class="material-symbols-outlined">
+                    person_search
+                </span>
+                <h3>Fraud Detection</h3>
+                <p>Eliminates fraudulent activities effectively.</p>
+            </div>
+            <div class="feature-card">
+                <span class="material-symbols-outlined">
+                    update
+                </span>
+                <h3>Real-Time Updates</h3>
+                <p>Provides live election updates and results.</p>
+            </div>
+            <div class="feature-card">
+                <span class="material-symbols-outlined">
+                    accessibility
+                </span>
+                <h3>Accessibility</h3>
+                <p>Ensures easy access for all citizens.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer will be injected here -->
+    <div id="footer-container"></div>
+    <!-- JS to load header and footer -->
+    <script src="static/script.js"></script>
+
+</body>
+
+</html>

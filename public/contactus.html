@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - Our Company</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .contact-header {
+            background: linear-gradient(45deg, #00cc88, #002aff);
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 30px 0;
+        }
+
+        .contact-method {
+            flex-basis: 30%;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .contact-method i {
+            font-size: 2.5em;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .contact-form {
+            background-color: rgb(198, 201, 243);
+            padding: 30px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .contact-form button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .contact-form button:hover {
+            background-color: #2980b9;
+        }
+
+        .contact-social-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .contact-social-icons a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #2c3e50;
+            font-size: 24px;
+            transition: color 0.3s;
+        }
+
+        .contact-social-icons a:hover {
+            color: #3498db;
+        }
+
+        .contact-success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Include header.html -->
+    <div id="header-container"></div>
+
+    <div class="contact-header">
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you!</p>
+    </div>
+
+    <div class="contact-container">
+        <div id="successMessage" class="contact-success-message">
+            Thank you for contacting us! We'll get back to you soon.
+        </div>
+
+        <div class="contact-info">
+            <div class="contact-method">
+                <i class="fas fa-phone"></i>
+                <h3>Toll Free Number</h3>
+                <p>1-800-123-4567</p>
+                <p>Available 24/7</p>
+            </div>
+
+            <div class="contact-method">
+                <i class="fas fa-envelope"></i>
+                <h3>Email Us</h3>
+                <p>info@yourcompany.com</p>
+                <p>support@yourcompany.com</p>
+            </div>
+
+            <div class="contact-method">
+                <i class="fas fa-share-alt"></i>
+                <h3>Social Media</h3>
+                <div class="contact-social-icons">
+                    <a href="https://facebook.com/ECI" target="_blank" title="Facebook"><i
+                            class="fab fa-facebook"></i></a>
+                    <a href="https://X.com/SpokespersonECI" target="_blank" title="Twitter"><i
+                            class="fab fa-twitter"></i></a>
+                    <a href="https://instagram.com/ecisveep/" target="_blank" title="Instagram"><i
+                            class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h2>Send Us a Message</h2>
+            <!-- Updated form with method and action -->
+            <form id="contactForm" method="POST" action="/submit-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Include footer.html -->
+    <div id="footer-container"></div>
+
+    <!-- JS to load header and footer -->
+    <script src="static/script.js"></script>
+
+</body>
+</html>

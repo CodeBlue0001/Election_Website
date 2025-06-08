@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Election Commission of India</title>
+    <style>
+        .header {
+            background-color: #004080;
+            border-bottom: 2px solid #c2048a;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+        }
+
+        .logo-title-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 60px;
+            height: auto;
+        }
+
+        .header-title h1,
+        .header-title h2 {
+            font-size: 1.5rem;
+            color: #fff;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .header-title h2 {
+            font-size: 1rem;
+        }
+
+        .navbar {
+            display: flex;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 5px 10px;
+        }
+
+        .navbar ul li a.active,
+        .navbar ul li a:hover {
+            background-color: #fff;
+            color: #004080;
+            border-radius: 4px;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 3px 0;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .navbar.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                background-color: #004080;
+                top: 60px;
+                right: 0;
+                width: 100%;
+                z-index: 99;
+                text-align: center;
+            }
+
+            .navbar ul {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .navbar ul li {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo-title-container">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Election Commission of India Logo">
+            </div>
+            <div class="header-title">
+                <h1>भारत निर्वाचन आयोग</h1>
+                <h2>Election Commission of India</h2>
+            </div>
+        </div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav class="navbar" id="navbar">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="https://www.eci.gov.in/election-management">Management</a></li>
+                <li><a href="https://www.eci.gov.in/faq">FAQ</a></li>
+                <li><a href="contactus.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const toggle = document.getElementById('mobile-menu');
+            const navbar = document.getElementById('navbar');
+
+            toggle.addEventListener('click', function () {
+                navbar.classList.toggle('active');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
