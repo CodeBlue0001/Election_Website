@@ -107,6 +107,7 @@ app.post('/submit-form', (req, res) => {
 // Route: Get voter details and base64 image from GridFS
 app.post('/get-voter-details', async (req, res) => {
   const { voter_id, date_of_birth, gender } = req.body;
+  console.log(voter_id);
 
   try {
     const voter = await Voter.findOne({ voter_id, date_of_birth, gender });
