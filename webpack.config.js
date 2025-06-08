@@ -11,8 +11,6 @@ module.exports = {
   },
   resolve: {
     fallback: {
-      '@aws-sdk/credential-providers': false,
-      'mongodb-client-encryption': false,
       fs: false,
       net: false,
       tls: false,
@@ -23,14 +21,17 @@ module.exports = {
       zlib: false
     }
   },
-  externals: {
-    // Prevent bundling native or optional modules
-    mongoose: 'commonjs mongoose',
-    mongodb: 'commonjs mongodb',
-    'mongodb-client-encryption': 'commonjs mongodb-client-encryption',
-    '@aws-sdk/credential-providers': 'commonjs @aws-sdk/credential-providers'
-  },
+  externals: [
+    // Let these stay external (not bundled)
+    'mongoose',
+    'mongodb',
+    'mongodb-client-encryption',
+    '@aws-sdk/credential-providers'
+  ],
   ignoreWarnings: [
+    {
+      message: /Critical dependency: the request of a dependency is an expression/
+    },
     {
       module: /@aws-sdk\/credential-providers/,
       message: /Module not found/
