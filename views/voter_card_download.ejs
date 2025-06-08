@@ -159,7 +159,7 @@
       const date_of_birth = document.getElementById("dob").value;
       const gender = document.getElementById("gender").value;
 
-      const response = await fetch("http://localhost:3000/get-voter-details", {
+      const response = await fetch("/get-voter-details", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ voter_id, date_of_birth, gender })
