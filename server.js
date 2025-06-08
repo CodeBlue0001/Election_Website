@@ -4,13 +4,12 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
-// const path = require('path');
 const fs = require('fs');
 const { ObjectId } = require('mongodb');
 const { MongoClient, GridFSBucket } = require('mongodb');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // ✅ Use environment port for Render
 
 // Create uploads folder if not exists
 const uploadsDir = path.join(__dirname, 'uploads');
@@ -21,11 +20,14 @@ if (!fs.existsSync(uploadsDir)) {
 // Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/uploads', express.static(uploadsDir));
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views')); // ✅ Set views path
+
+// Serve static files from the public directory
+app.use(express.static(path.join(__dirname, 'public'))); // ✅ Serve frontend files
 
 // MongoDB URI and connection
 const mongoURI = 'mongodb+srv://User-devwithme:user-devwithme@api-checkup.it4iz.mongodb.net/official_website_db?retryWrites=true&w=majority';
@@ -51,27 +53,20 @@ const VoterSchema = new mongoose.Schema({
   date_of_birth: String,
   gender: String,
   constituency: String,
-  photo: ObjectId // GridFS ObjectId
+  photo: ObjectId
 }, { collection: 'voter_data_collection' });
 
 const Voter = mongoose.model('Voter', VoterSchema);
 
-
-
-
-
-// Serve static files from the public directory
-app.use(express.static(path.join(__dirname, 'public')));
-
 // Default route
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/voter_card_download', async (req, res) => {
   try {
-    res.render('voter_card_download.ejs');
-    console.log("GET / rendered");
+    res.render('voter_card_download');
+    console.log("GET /voter_card_download rendered");
   } catch (error) {
     console.error("Rendering error:", error);
     res.status(500).send("View render failed.");
@@ -80,35 +75,33 @@ app.get('/voter_card_download', async (req, res) => {
 
 // Handle form submission
 app.post('/submit-form', (req, res) => {
-    const { name, email, subject, message } = req.body;
+  const { name, email, subject, message } = req.body;
+  console.log('Form Submission:', req.body);
 
-    console.log('Form Submission:', req.body);
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'dipayansardar477@gmail.com',
+      pass: 'issq ubqn uipo zfrf' // App Password only
+    }
+  });
 
-    // Send email to user using Nodemailer
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'dipayansardar477@gmail.com',
-            pass: 'issq ubqn uipo zfrf'        // Use App Password (not your main Gmail password)
-        }
-    });
+  const mailOptions = {
+    from: 'dipayansardar477@gmail.com',
+    to: email,
+    subject: 'Thank you for contacting us',
+    text: `Hi ${name},\n\nThank you for reaching out to us. We have received your message:\n\n"${message}"\n\nWe will get back to you soon.\n\nBest regards,\nNEW GENERATION VOTING SYSTEM.`
+  };
 
-    const mailOptions = {
-        from: 'dipayansardar477@gmail.com',
-        to: email,
-        subject: 'Thank you for contacting us',
-        text: `Hi ${name},\n\nThank you for reaching out to us. We have received your message:\n\n"${message}"\n\nWe will get back to you soon.\n\nBest regards,\nNEW GENERATION VOTING SYSTEM.`
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error('Error sending email:', error);
-            return res.status(500).send('Error sending email');
-        } else {
-            console.log('Email sent:', info.response);
-            return res.redirect('/'); // or send a message
-        }
-    });
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Error sending email:', error);
+      return res.status(500).send('Error sending email');
+    } else {
+      console.log('Email sent:', info.response);
+      return res.redirect('/');
+    }
+  });
 });
 
 // Route: Get voter details and base64 image from GridFS
@@ -170,8 +163,7 @@ app.post('/get-voter-details', async (req, res) => {
   }
 });
 
-
 // Start server
 app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
